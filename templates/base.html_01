@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Rango - {% block title %}How to Tango with Django!{% endblock %}</title>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+
+        <hr />
+
+        <div>
+        <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
+            <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
+            <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+            <li><a href="../../accounts/password/change/">Change Password</a> </li>
+        {% else %}
+            <li><a href="{% url 'registration_register' %}">Register Here</a></li>
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+        </div>
+        <img src="{% static "images/rango.jpg" %}" width="50%" height="50%" alt="Picture of Rango" />
+    </body>
+</html>
