@@ -76,7 +76,7 @@ def call(
             HTTP_PROXY = "${env.PROXY}"
             HTTPS_PROXY = "${env.PROXY}"
             // This is a hack to force connectivity to these cluster to go direct
-            NO_PROXY = "opn-console-mmz-uat1.unionbank.com,opn-console-mmz-uat2.opn.unionbank.com,.opn.unionbank.com"
+            NO_PROXY = "opn.com,opn-console-mmz-uat2.opn.com,opn.uk.com"
         }
 
         parameters {
@@ -304,8 +304,7 @@ def call(
                                     // if ticket number = emergency, allow for emergency deployment by the pipeline operations team
                                     if (params.ChangeNumber.trim().toLowerCase() == "emergency") {
                                         echo "########## IMPORTANT ##########"
-                                        echo "This is an emergency deployment to Production. Explicit approval by the pipeline operations team is required. Please have the operations team work alongside you to approve the deployment."
-                                        echo "Emergency deployment should be a last resort to resolve a pressing Production outage in case an emergency change management ticket can't be obtained. A post-event change management ticket must be raised to cover this emergency change."
+                                        echo "This is an emergency deployment to Production."
                                         def userInput = ''
                                         timeout(time: 15, unit: "MINUTES") {
                                             userInput = input(message: 'Pipeline Operator: Do you approve this emergency deployment to Production?',
